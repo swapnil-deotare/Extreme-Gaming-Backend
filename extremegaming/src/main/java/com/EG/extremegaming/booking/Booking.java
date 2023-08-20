@@ -1,25 +1,44 @@
 package com.EG.extremegaming.booking;
 
 import java.util.Date;
-import java.util.List;
+import java.util.UUID;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
+
+@DynamoDBDocument
 public class Booking {
 
+    @DynamoDBAttribute
     private String bookingId;
-    private String personName;
-    private List<String> friends;
+
+    @DynamoDBAttribute
     private Date startTime;
+
+    @DynamoDBAttribute
     private Date endTime;
+
+    @DynamoDBAttribute
+    private int numberOfPlayers;
+
+    @DynamoDBAttribute
     private String type;
 
-    public Booking(String bookingId, String personName, List<String> friends, Date startTime, Date endTime,
+    public Booking(int numberOfPlayers, Date startTime, Date endTime,
             String type) {
-        this.bookingId = bookingId;
-        this.personName = personName;
-        this.friends = friends;
+        this.bookingId = UUID.randomUUID().toString();
+        this.numberOfPlayers = numberOfPlayers;
         this.startTime = startTime;
         this.endTime = endTime;
         this.type = type;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
     }
 
     public String getBookingId() {
@@ -28,22 +47,6 @@ public class Booking {
 
     public void setBookingId(String bookingId) {
         this.bookingId = bookingId;
-    }
-
-    public String getPersonName() {
-        return personName;
-    }
-
-    public void setPersonName(String personName) {
-        this.personName = personName;
-    }
-
-    public List<String> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<String> friends) {
-        this.friends = friends;
     }
 
     public Date getStartTime() {
