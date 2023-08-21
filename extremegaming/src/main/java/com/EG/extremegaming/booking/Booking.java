@@ -13,10 +13,10 @@ public class Booking {
     private String bookingId;
 
     @DynamoDBAttribute
-    private Date startTime;
+    private String startTime;
 
     @DynamoDBAttribute
-    private Date endTime;
+    private String endTime;
 
     @DynamoDBAttribute
     private int numberOfPlayers;
@@ -24,7 +24,7 @@ public class Booking {
     @DynamoDBAttribute
     private String type;
 
-    public Booking(int numberOfPlayers, Date startTime, Date endTime,
+    public Booking(int numberOfPlayers, String startTime, String endTime,
             String type) {
         this.bookingId = UUID.randomUUID().toString();
         this.numberOfPlayers = numberOfPlayers;

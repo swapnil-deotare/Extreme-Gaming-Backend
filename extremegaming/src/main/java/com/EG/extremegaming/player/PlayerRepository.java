@@ -26,7 +26,7 @@ public class PlayerRepository {
     public String deletePlayer(String playerId) {
         Player player = dynamoDBMapper.load(Player.class, playerId);
         dynamoDBMapper.delete(player);
-        return "Successfuly Deleted";
+        return playerId;
     }
 
     public String updatePlayer(String playerId, Player player) {

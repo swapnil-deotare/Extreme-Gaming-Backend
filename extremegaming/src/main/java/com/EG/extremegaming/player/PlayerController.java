@@ -1,5 +1,10 @@
 package com.EG.extremegaming.player;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.EG.extremegaming.booking.Booking;
 
 @RestController
 public class PlayerController {
@@ -22,6 +29,13 @@ public class PlayerController {
 
     @PostMapping("/player")
     public Player savePlayer(@RequestBody Player player) {
+        String pattern = "MM/dd/yyyy HH:mm:ss";
+        SimpleDateFormat df = new SimpleDateFormat(pattern);
+        Date today = Calendar.getInstance().getTime();
+        Booking booking = new Booking(0, df.format(today), df.format(today), "PS3");
+        ArrayList<Booking> allbookings = new ArrayList<Booking>();
+        allbookings.add(booking);
+        player.setAllbookings(allbookings);
         return playerRepository.save(player);
     }
 
